@@ -1,0 +1,134 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Two Silver Brewing | Roll for Flavor</title>
+    <link href="https://unpkg.com/aos@2.3.1/dist/aos.css" rel="stylesheet">
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+    <div class="video-container">
+        <video src="Website_video_7.mp4" autoplay muted loop playsinline id="bg-video"></video>
+        <div class="overlay"></div>
+    </div>
+
+    <nav>
+        <a href="index.html" class="logo-link">
+            <img src="Two_Silver_Brewing_logo.png" alt="Two Silver Logo" class="logo-img">
+        </a>
+        <div>
+            <a href="index.html#brews">The Brews</a>
+            <a href="index.html#guild">The Guild</a>
+        </div>
+    </nav>
+
+    <header>
+        <h1 data-aos="fade-down">Roll For Flavor</h1>
+        <p class="subtitle" data-aos="fade-up" data-aos-delay="200">Craft Brewing for the Modern Adventurer</p>
+    </header>
+
+    <section class="product-section" id="brews">
+        <h2 style="text-align:center; margin-bottom:60px;" data-aos="fade-up">The Current Campaign</h2>
+        <div class="grid">
+            
+            <div class="card" data-aos="fade-up">
+                <a href="dungeon-stout.html" class="img-link">
+                    <div class="img-container">
+                        <img src="Beer_list_mockup_dungeon_stout.png" alt="Dungeon Stout" class="beer-img">
+                    </div>
+                </a>
+                <h3>Dungeon Stout</h3>
+                <p>A dark, heavy hitter with notes of coffee and smoke.</p>
+            </div>
+
+            <div class="card" data-aos="fade-up" data-aos-delay="100">
+                <a href="paladin-pale-ale.html" class="img-link">
+                    <div class="img-container">
+                         <img src="Beer_list_mockup_paladin_pale_ale.png" alt="Paladin Pale Ale" class="beer-img">
+                    </div>
+                </a>
+                <h3>Paladin Pale Ale</h3>
+                <p>Bright, righteous, and full of citrus hops.</p>
+            </div>
+
+            <div class="card" data-aos="fade-up" data-aos-delay="200">
+                <a href="critical-hit-ipa.html" class="img-link">
+                    <div class="img-container">
+                        <img src="Beer_list_mockup_critical_hit_ipa.png" alt="Critical Hit IPA" class="beer-img">
+                    </div>
+                </a>
+                <h3>Critical Hit IPA</h3>
+                <p>High ABV, high bitterness, maximum damage.</p>
+            </div>
+
+        </div>
+    </section>
+
+    <section class="guild-section" id="guild">
+        <div class="guild-container">
+            
+            <div class="guild-text" data-aos="fade-right">
+                <h2>The Guild</h2>
+                <h3>Crafted for Adventurers, By Adventurers</h3>
+                <p>
+                    Two Silver Brewing wasn't founded in a boardroom; it was forged around a gaming table. 
+                    We realized that while our campaigns were legendary, the beer we were drinking was merely common loot.
+                </p>
+                <p>
+                    We brew small-batch ales designed to pair perfectly with your next dungeon crawl. 
+                    Whether you just rolled a Natural 20 or you're recovering from a Total Party Kill, 
+                    we have the perfect potion for your party.
+                </p>
+                <img src="Two_Silver_Brewing_logo.svg" alt="Guild Seal" class="guild-seal">
+            </div>
+
+            <div class="guild-image" data-aos="fade-left">
+                <img src="Guild_section_cheers.png" alt="The Guild Cheers" id="guild-cheers">
+            </div>
+
+        </div>
+    </section>
+
+    <footer>
+        <div class="footer-content">
+            <div class="footer-logo">
+                <h2>Two Silver Brewing</h2>
+            </div>
+            
+            <div class="footer-links">
+                <a href="index.html#brews">The Brews</a>
+                <a href="index.html#guild">The Guild</a>
+                <a href="#">Contact</a>
+            </div>
+
+            <div class="social-icons">
+                <a href="#">Instagram</a> | <a href="#">Twitter</a> | <a href="#">Untappd</a>
+            </div>
+
+            <p class="copyright">
+                &copy; 2025 Two Silver Brewing. All Rights Reserved.<br>
+                <span class="drink-responsibly">Please Drink Responsibly. Do not open mimics.</span>
+            </p>
+        </div>
+    </footer>
+
+    <script src="https://unpkg.com/aos@2.3.1/dist/aos.js"></script>
+    <script>
+        AOS.init({ duration: 1000, once: true });
+    </script>
+    <script>
+    // Video Loop Script
+    var myVideo = document.getElementById('bg-video');
+    if (myVideo) {
+        myVideo.loop = true;
+        myVideo.addEventListener('ended', function() {
+            this.currentTime = 0;
+            this.play();
+        }, false);
+    }
+    </script>
+
+</body>
+</html>

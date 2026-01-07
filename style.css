@@ -1,0 +1,534 @@
+/* --- 1. IMPORT FONTS --- */
+@import url('https://fonts.googleapis.com/css2?family=Cinzel:wght@400;700;900&family=Lato:wght@300;400;700&display=swap');
+
+/* --- GLOBAL SETTINGS --- */
+html {
+    scroll-behavior: smooth;
+    overflow-y: scroll; /* Prevents scrollbar jumping */
+    /* This creates a "landing pad" so the sticky header doesn't hide titles */
+    scroll-padding-top: 60px;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    width: 100%;
+    background-color: #050505;
+    font-family: 'Lato', sans-serif;
+    color: #fff;
+    overflow-x: hidden; /* Prevents side-scrolling */
+}
+
+/* Typography Defaults */
+h1, h2, h3, nav a, .cta-link, .product-title, .product-subtitle, .stat-value, .btn-primary, footer h2, .footer-links a {
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+}
+
+/* --- VIDEO BACKGROUND --- */
+.video-container {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100vh;
+    overflow: hidden;
+    z-index: -1;
+}
+
+#bg-video {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.overlay {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.6);
+    z-index: 1;
+}
+
+/* --- NAVIGATION --- */
+nav {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 120px; /* Consistent height for the bar */
+    padding: 0 60px; 
+    display: flex;
+    justify-content: space-between;
+    align-items: center; 
+    z-index: 1000; 
+    background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
+    box-sizing: border-box; 
+    overflow: visible; /* CRITICAL: allows the logo glow to show */
+}
+
+/* THE LOGO SIDE */
+.logo-link {
+    display: flex;
+    align-items: center;
+    height: 100%;
+    z-index: 1001;
+    
+    /* NEW: Prevents the logo from getting squished by the other links */
+    flex-shrink: 0; 
+    
+    /* NEW: Ensures no invisible box is clipping the top */
+    overflow: visible; 
+}
+
+.logo-img { 
+    height: 100px; /* The size you liked on the Product Page */
+    width: auto;
+    
+    display: block;
+    object-fit: contain;
+    filter: drop-shadow(0 0 15px rgba(255,255,255,0.2));
+    
+    /* NEW: Prevents browser defaults from messing with the aspect ratio */
+    min-height: 100px; 
+}
+
+/* THE LINKS SIDE (The Group Wrapper) */
+nav div {
+    display: flex;
+    align-items: center;
+    z-index: 1001;
+}
+
+/* THE ACTUAL BUTTONS */
+nav a:not(.logo-link) {
+    color: white !important; /* Forces visibility */
+    text-decoration: none;
+    margin-left: 35px; /* Spacing between buttons */
+    font-size: 1.1rem;
+    font-family: 'Cinzel', serif;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    transition: color 0.3s ease, text-shadow 0.3s ease;
+    position: relative;
+}
+
+nav a:not(.logo-link):hover {
+    color: #ffffff !important;
+    text-shadow: 0 0 10px rgba(212, 175, 55, 0.5);
+    /* Creates a gold glow around the text */
+    text-shadow: 
+        0 0 5px #d4af37,
+        0 0 10px #d4af37,
+        0 0 20px #d4af37;
+}
+
+/* --- HERO SECTION --- */
+header {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+    padding: 0 20px; /* Adds safety padding so text doesn't touch edges */
+    box-sizing: border-box;
+}
+
+/* Main Title - BIG */
+h1 { 
+    font-size: 4rem; 
+    text-transform: uppercase; 
+    letter-spacing: 10px; 
+    margin-bottom: 10px; 
+    text-shadow: 0 10px 30px rgba(0,0,0,0.8);
+    line-height: 1.1;
+}
+
+/* Subtitle - SMALLER & FIXED SPACING */
+.subtitle {
+    font-size: 1.2rem; /* Much smaller than H1 */
+    color: #ccc;
+    letter-spacing: 4px; /* Reduced from 30px to prevent zooming issues */
+    text-indent: 4px; /* Balances the spacing */
+    text-transform: uppercase;
+    font-weight: 700;
+    text-shadow: 0 4px 10px rgba(0, 0, 0, 1.0);
+    margin-top: 15px;
+    display: block;
+}
+
+/* --- PRODUCT GRID SECTION --- */
+.product-section {
+    position: relative;
+    background: linear-gradient(to bottom, transparent 0%, rgba(10,10,10,0.9) 20%, rgba(10,10,10,0.9) 80%, transparent 100%);
+    padding: 100px 5%;
+    min-height: 100vh;
+}
+
+.product-section h2 {
+    font-size: 3rem;
+    color: #d4af37;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.5);
+    text-align: center;
+    margin-bottom: 60px;
+}
+
+.grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 60px;
+    max-width: 1200px;
+    margin: 0 auto;
+    position: relative;
+    z-index: 2;
+}
+
+.card {
+    background-color: #000000; 
+    border: 1px solid #333;
+    border-radius: 20px;
+    text-align: center;
+    padding: 20px;
+    box-shadow: 0 0px 20px rgb(0, 0, 0, 1.0); 
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-10px);
+    box-shadow: 0 0px 30px rgba(0, 0, 0, 1.0);
+    border-color: #555;
+}
+
+.img-container {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    margin-bottom: 20px;
+}
+
+.beer-img {
+    max-height: 500px; 
+    width: auto;
+    height: auto;
+    display: block;
+    transition: transform 0.3s ease;
+}
+
+.card:hover .beer-img {
+    transform: translateY(-10px); 
+}
+
+.card h3 {
+    font-size: 1.8rem;
+    margin-top: 15px;
+}
+
+.cta-link {
+    display: inline-block;
+    margin-top: 15px;
+    color: #ffffff;
+    text-decoration: none;
+    font-weight: 700;
+    letter-spacing: 1px;
+    font-size: 0.9rem;
+    transition: color 0.3s ease;
+}
+
+.cta-link:hover {
+    text-decoration: underline;
+    color: #d4af37;
+}
+
+/* --- THE GUILD SECTION --- */
+.guild-section {
+    padding: 100px 20px;
+    background-color: #0a0a0a;
+    color: #fff;
+    display: flex;
+    justify-content: center;
+}
+
+.guild-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1200px;
+    align-items: center;
+    gap: 50px;
+}
+
+.guild-text {
+    flex: 1;
+    min-width: 300px;
+    padding-right: 20px;
+}
+
+.guild-text h2 {
+    font-size: 3rem;
+    color: #d4af37;
+    margin-bottom: 10px;
+}
+
+.guild-text h3 {
+    font-family: 'Lato', sans-serif;
+    font-weight: 300;
+    text-transform: uppercase;
+    letter-spacing: 2px;
+    font-size: 1.2rem;
+    margin-bottom: 30px;
+    color: #aaa;
+    border-bottom: 1px solid #333;
+    padding-bottom: 20px;
+    display: inline-block;
+}
+
+.guild-text p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+.guild-seal {
+    width: 80px;
+    margin-top: 20px;
+    opacity: 0.8;
+}
+
+.guild-image {
+    flex: 1;
+    min-width: 300px;
+}
+
+.guild-image img {
+    width: 100%;
+    border-radius: 10px;
+    box-shadow: 0 20px 50px rgba(0,0,0,0.5);
+    border: 1px solid #333;
+}
+
+.product-showcase {
+    /* Increased from 100px to 140px to account for the bigger nav */
+    padding-top: 140px; 
+    background: linear-gradient(135deg, #0a0a0a 0%, #1a1a1a 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding-bottom: 50px;
+    color: #fff;
+}
+
+.product-container {
+    display: flex;
+    flex-wrap: wrap;
+    max-width: 1100px;
+    width: 90%;
+    gap: 60px;
+    align-items: center;
+}
+
+.product-image {
+    flex: 1;
+    min-width: 300px;
+    text-align: center;
+}
+
+.product-image img {
+    max-width: 100%;
+    border-radius: 20px;
+    box-shadow: 0 0 40px rgba(0,0,0,0.8);
+    border: 1px solid #333;
+}
+
+.product-details {
+    flex: 1;
+    min-width: 300px;
+}
+
+.product-title {
+    font-size: 3.5rem;
+    color: #d4af37;
+    margin-bottom: 5px;
+    text-shadow: 0 4px 10px rgba(0,0,0,0.5);
+}
+
+.product-subtitle {
+    font-family: 'Cinzel', serif;
+    font-size: 1.2rem;
+    color: #888;
+    margin-bottom: 30px;
+    letter-spacing: 2px;
+    text-transform: uppercase;
+}
+
+/* Stat Block */
+.stat-block {
+    display: flex;
+    gap: 20px;
+    margin-bottom: 30px;
+    background: rgba(255, 255, 255, 0.05);
+    padding: 15px;
+    border-radius: 10px;
+    border: 1px solid #333;
+}
+
+.stat-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    flex: 1;
+    border-right: 1px solid #444;
+}
+
+.stat-item:last-child {
+    border-right: none;
+}
+
+.stat-label {
+    font-size: 0.8rem;
+    color: #aaa;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+}
+
+.stat-value {
+    font-family: 'Cinzel', serif;
+    font-size: 1.5rem;
+    font-weight: 700;
+    color: #fff;
+}
+
+.product-lore p {
+    font-size: 1.1rem;
+    line-height: 1.8;
+    color: #ddd;
+    margin-bottom: 20px;
+}
+
+.btn-primary {
+    display: inline-block;
+    margin-top: 20px;
+    background-color: #d4af37;
+    color: #000;
+    padding: 15px 40px;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    text-decoration: none;
+    border-radius: 5px;
+    transition: all 0.3s ease;
+}
+
+.btn-primary:hover {
+    background-color: #fff;
+    transform: translateY(-3px);
+    box-shadow: 0 10px 20px rgba(212, 175, 55, 0.3);
+}
+
+/* --- FOOTER --- */
+footer {
+    background-color: #000;
+    color: #fff;
+    padding: 60px 20px;
+    text-align: center;
+    border-top: 1px solid #333;
+}
+
+.footer-logo h2 {
+    font-size: 2rem;
+    color: #d4af37;
+    margin-bottom: 20px;
+}
+
+.footer-links {
+    margin-bottom: 30px;
+}
+
+.footer-links a {
+    color: #ddd;
+    text-decoration: none;
+    margin: 0 15px;
+    font-family: 'Cinzel', serif;
+    font-weight: 700;
+    text-transform: uppercase;
+    transition: color 0.3s ease;
+}
+
+.footer-links a:hover {
+    color: #d4af37;
+}
+
+.social-icons {
+    margin-bottom: 30px;
+    font-family: 'Lato', sans-serif;
+    color: #888;
+}
+
+.social-icons a {
+    color: #888;
+    text-decoration: none;
+    margin: 0 10px;
+    transition: color 0.3s ease;
+}
+
+.social-icons a:hover {
+    color: #fff;
+}
+
+.copyright {
+    font-family: 'Lato', sans-serif;
+    font-size: 0.9rem;
+    color: #555;
+    line-height: 1.6;
+}
+
+.drink-responsibly {
+    color: #777;
+    font-style: italic;
+}
+
+/* --- MOBILE RESPONSIVENESS --- */
+@media (max-width: 768px) {
+    
+    /* 1. Stack the Navigation cleanly */
+    nav {
+        flex-direction: column; /* Puts logo on top, links below */
+        height: auto !important; /* Let the height grow to fit content */
+        padding: 20px 0;
+        background: rgba(0,0,0,0.95); /* darker background for readability */
+    }
+
+    .logo-img {
+        height: 80px !important; /* Slightly smaller logo for mobile */
+        margin-bottom: 15px;
+    }
+
+    nav a:not(.logo-link) {
+        margin: 0 15px; /* Adjust spacing for stacked links */
+        font-size: 1rem;
+    }
+
+    /* 2. Push the Content down so it doesn't hide behind the Nav */
+    .product-showcase {
+        padding-top: 200px; /* Push content way down to clear the stacked nav */
+    }
+
+    /* 3. Scale down the massive titles so they don't break off-screen */
+    .product-title, h1 {
+        font-size: 2.5rem; 
+        line-height: 1.2;
+    }
+
+    .product-subtitle {
+        font-size: 1rem;
+    }
+
+    /* 4. Fix the Home Page Hero Title overlap */
+    header {
+        padding-top: 180px;
+    }
+}
