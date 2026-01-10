@@ -8,7 +8,23 @@
     <link rel="stylesheet" href="style.css">
 </head>
 <body>
-
+<div id="age-gate" class="age-gate-overlay">
+    <div class="age-gate-box">
+        <img src="Two_Silver_Brewing_logo.png" alt="Two Silver Logo" class="age-gate-logo">
+        <h2>Identify Yourself</h2>
+        <p>You must be of legal drinking age to enter.</p>
+        <p class="disclaimer">
+            <strong>PORTFOLIO PROJECT NOTICE:</strong><br>
+            This is a conceptual website for a graphic design portfolio. 
+            No real alcohol is being sold.
+        </p>
+        
+        <div class="age-buttons">
+            <button id="btn-yes" class="btn-primary">I am 21+ (Enter)</button>
+            <button id="btn-no" class="btn-secondary">I am under 21</button>
+        </div>
+    </div>
+</div>
     <div class="video-container">
         <video src="Website_video_7.mp4" autoplay muted loop playsinline id="bg-video"></video>
         <div class="overlay"></div>
@@ -41,6 +57,7 @@
                 </a>
                 <h3>Dungeon Stout</h3>
                 <p>A dark, heavy hitter with notes of coffee and smoke.</p>
+                <a href="dungeon-stout.html" class="btn-card">Learn More</a>
             </div>
 
             <div class="card" data-aos="fade-up" data-aos-delay="100">
@@ -51,6 +68,7 @@
                 </a>
                 <h3>Paladin Pale Ale</h3>
                 <p>Bright, righteous, and full of citrus hops.</p>
+                <a href="paladin-pale-ale.html" class="btn-card">Learn More</a>
             </div>
 
             <div class="card" data-aos="fade-up" data-aos-delay="200">
@@ -61,6 +79,7 @@
                 </a>
                 <h3>Critical Hit IPA</h3>
                 <p>High ABV, high bitterness, maximum damage.</p>
+                <a href="critical-hit-ipa.html" class="btn-card">Learn More</a>
             </div>
 
         </div>
@@ -129,6 +148,40 @@
         }, false);
     }
     </script>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function() {
+        const ageGate = document.getElementById('age-gate');
+        const btnYes = document.getElementById('btn-yes');
+        const btnNo = document.getElementById('btn-no');
+
+        // Check if user already passed the gate in this session
+        if (sessionStorage.getItem('ageVerified') === 'true') {
+            ageGate.style.display = 'none';
+        }
+
+        btnYes.addEventListener('click', function() {
+            // Hide the gate
+            ageGate.style.opacity = '0';
+            setTimeout(() => {
+                ageGate.style.display = 'none';
+            }, 500); // Wait for fade out
+            
+            // Remember they said yes (for this tab session)
+            sessionStorage.setItem('ageVerified', 'true');
+            
+            // Start the video if it wasn't autoplaying behind the gate
+            var video = document.getElementById('bg-video');
+            if(video) video.play();
+        });
+
+        btnNo.addEventListener('click', function() {
+            alert("You must be of legal drinking age to view this portfolio project.");
+            // Optional: Redirect them to Google or Disney
+            // window.location.href = "https://www.google.com";
+        });
+    });
+</script>
 
 </body>
 </html>
