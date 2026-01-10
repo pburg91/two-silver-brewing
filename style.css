@@ -48,8 +48,13 @@ h1, h2, h3, nav a, .cta-link, .product-title, .product-subtitle, .stat-value, .b
     left: 0;
     width: 100%;
     height: 100%;
-    background-color: rgba(0, 0, 0, 0.6);
     z-index: 1;
+    /* A deep gradient: almost solid black at top, fading to semi-transparent at bottom */
+    background: linear-gradient
+        180deg, 
+        rgba(0,0,0,0.95) 25%,   /* Start almost solid black at the very top */
+        rgba(0,0,0,0.7) 50%,   /* Keep it pretty dark down to the "Roll For Flavor" text */
+        rgba(0,0,0,0.4) 50%   /* Fade out towards the bottom */
 }
 
 /* --- AGE GATE --- */
@@ -135,20 +140,48 @@ h1, h2, h3, nav a, .cta-link, .product-title, .product-subtitle, .stat-value, .b
 }
 
 /* --- NAVIGATION --- */
+/* --- NAVIGATION (CLEAN VERSION) --- */
 nav {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    
+    /* FIX: Instead of width: 100%, we use left/right anchors. 
+       This prevents padding from pushing things off screen. */
     position: fixed;
     top: 0;
     left: 0;
+    right: 0; 
+    
+    padding: 20px 50px;
+    z-index: 1000;
+    background: transparent; /* No gradients, just clean text */
+    
+    /* Safety check to ensure borders don't break layout */
+    box-sizing: border-box;
+}
+
+/* --- THE SHADOW CURTAIN (Add this after 'nav') --- */
+nav::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
     width: 100%;
-    height: 120px; /* Consistent height for the bar */
-    padding: 0 60px; 
-    display: flex;
-    justify-content: space-between;
-    align-items: center; 
-    z-index: 1000; 
-    background: linear-gradient(to bottom, rgba(0,0,0,0.9), transparent);
-    box-sizing: border-box; 
-    overflow: visible; /* CRITICAL: allows the logo glow to show */
+    
+    /* Height: 180px is enough to cover the text but not ruin the video */
+    height: 180px; 
+    
+    /* THE GRADIENT SETTINGS */
+    background: linear-gradient(
+        to bottom, 
+        rgba(0,0,0,1) 0%,       /* 100% Black at the very top edge */
+        rgba(0,0,0,0.8) 40%,    /* 80% Dark just behind the "Guild" text */
+        rgba(0,0,0,0) 100%      /* Fades to transparent at the bottom */
+    );
+    
+    z-index: -1; /* Ensures it sits BEHIND the text */
+    pointer-events: none; /* Important: Lets you click things under the fade */
 }
 
 /* THE LOGO SIDE */
@@ -193,8 +226,10 @@ nav a:not(.logo-link) {
     font-family: 'Cinzel', serif;
     text-transform: uppercase;
     letter-spacing: 2px;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.9); /* Heavy black shadow behind the letters */
     transition: color 0.3s ease, text-shadow 0.3s ease;
     position: relative;
+    text-shadow: 0 2px 10px rgba(0,0,0,0.9); /* Heavy black shadow behind the letters */
 }
 
 /* Card Buttons */
@@ -269,9 +304,18 @@ h1 {
 /* --- PRODUCT GRID SECTION --- */
 .product-section {
     position: relative;
-    background: linear-gradient(to bottom, transparent 0%, rgba(10,10,10,0.9) 20%, rgba(10,10,10,0.9) 80%, transparent 100%);
+    
+    /* FIX: Use a solid color instead of a transparent gradient */
+    background-color: #050505; 
+    
     padding: 100px 5%;
     min-height: 100vh;
+    
+    /* FIX: This ensures the black box sits ON TOP of the video background */
+    z-index: 10; 
+    
+    /* Optional: Adds a subtle shadow at the top edge so the line isn't too harsh */
+    box-shadow: 0 -20px 50px rgba(0,0,0,1);
 }
 
 .product-section h2 {
@@ -604,10 +648,17 @@ footer {
     
     /* 1. Stack the Navigation cleanly */
     nav {
-        flex-direction: column; /* Puts logo on top, links below */
-        height: auto !important; /* Let the height grow to fit content */
-        padding: 20px 0;
-        background: rgba(0,0,0,0.95); /* darker background for readability */
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 20px 50px;
+        position: fixed;
+        width: 100%;
+        z-index: 1000;
+        background: transparent; 
+    
+    /* --- ADD THIS LINE TO FIX THE CUT-OFF --- */
+    box-sizing: border-box;
     }
 
     .logo-img {
