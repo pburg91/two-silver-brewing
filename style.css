@@ -691,4 +691,24 @@ footer {
         padding-top: 180px;
     }
 
+    /* --- IFRAME / PORTFOLIO FIXES --- */
+
+/* 1. Shrink the Hero so it doesn't take up the whole embed window */
+@media (max-height: 1200px) { 
+    header {
+        height: 600px !important; /* Forces header to be shorter */
+        min-height: 500px;
+    }
+}
+
+/* 2. Lighten the dark overlay so the video is actually visible */
+.overlay {
+    /* Changed from 0.95 (95% black) to 0.6 (60% black) at the top */
+    background: linear-gradient(
+        180deg, 
+        rgba(0,0,0,0.6) 0%,   /* Much lighter top */
+        rgba(0,0,0,0.4) 50%, 
+        rgba(0,0,0,0.1) 100%  /* Fades out more at the bottom */
+    ) !important;
+}
 }
