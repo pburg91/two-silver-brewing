@@ -690,4 +690,31 @@ footer {
     header {
         padding-top: 180px;
     }
+
+    /* Container: This centers the box on the page */
+.project-embed-wrapper {
+    width: 100%;             /* Fills the width of the page */
+    max-width: 1200px;       /* Stops it from getting too wide on huge monitors */
+    margin: 60px auto;       /* TOP/BOTTOM: 60px space. LEFT/RIGHT: Auto (Centers it) */
+    height: 800px;           /* Forces the height of the container */
+    border: 1px solid #333;  /* Optional: Adds a subtle border */
+    border-radius: 12px;     /* Rounded corners */
+    overflow: hidden;        /* Clips corners */
+    box-shadow: 0 10px 40px rgba(0,0,0,0.5); /* Adds depth */
+}
+
+/* Iframe: This forces the window to fill the container */
+.project-embed-wrapper iframe {
+    width: 100% !important;  /* Force full width */
+    height: 100% !important; /* Force full height to match container */
+    border: none;            /* Removes default ugly border */
+    display: block;          /* Fixes tiny gap issues */
+}
+
+/* Mobile Tweak: Make it shorter on phones */
+@media (max-width: 768px) {
+    .project-embed-wrapper {
+        height: 500px;
+    }
+}
 }
